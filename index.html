@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShaadiSmart - Your Ultimate Wedding Planner</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes zoomIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .slide {
+            width: 100%;
+            height: 300px;
+            border-radius: 8px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f8f8;
+            color: #333;
+            margin: 0;
+            animation: fadeIn 1.5s ease-in;
+            line-height: 1.6;
+        }
+
+        header {
+            background-image: url('hindu-wedding-held-at-amaanta-farms-gurgaon-albummed-photography.jpg'); /* Or use external hosted version */
+            background-size: cover;
+            background-position: center;
+            padding: 80px 20px; 
+            text-align: center;
+            position: relative;
+            color: #fdd835;
+            margin-bottom: 20px;
+        }
+
+        header::before {
+            content: "";
+            background: rgba(0, 0, 0, 0.5); 
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 1;
+        }
+
+        header h1 {
+            font-family: 'Cinzel Decorative', cursive;
+            font-size: 3rem;
+            color: #fdd835;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+        }
+
+        header p {
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin-top: 10px;
+            color: #fff;
+            position: relative;
+            z-index: 2;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+        }
+
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            padding: 10px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 1px solid #eee; 
+        }
+
+        nav a {
+            color: #555;
+            margin: 0 10px;
+            padding: 8px 12px; 
+            font-size: 0.9rem;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        nav a:hover,
+        nav a:focus,
+        nav a.active {
+            background-color: #fdd835;
+            color: #fff;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 300px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .hero h2 {
+            color: #333;
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+            text-shadow: none;
+            position: absolute; 
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 15px 30px;
+            border-radius: 10px;
+            z-index: 1;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+            text-align: center;
+            animation: fadeIn 1s ease-in;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .feature-icon {
+            background: #fff;
+            padding: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-icon:hover {
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .feature-icon span {
+            display: block;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #d81b60;
+            font-size: 0.9rem;
+        }
+
+        #about {
+            padding: 40px 20px;
+            margin-top: 40px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        #about h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        #about p {
+            line-height: 1.7;
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .contact-form {
+            margin-top: 40px;
+            padding: 30px 20px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        .contact-form h2 {
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 0.9rem;
+        }
+
+        .contact-form button {
+            background-color: #d81b60;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-size: 1rem;
+            font-weight: 500;
+            margin-top: 15px;
+        }
+
+        .contact-form button:hover {
+            background-color: #ad1457;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            font-size: 0.8rem;
+        }
+
+        footer a {
+            color: #fdd835; 
+            margin: 0 8px; 
+            text-decoration: none;
+        }
+        D:\chat\OIP.jpg
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        footer p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>THE INDIAN WEDDINGS</h1>
+        <p>Your Guide to Exquisite Celebrations</p>
+    </header>
+
+    <nav>
+        <a href="#home" class="active">Home</a>
+        <a href="#about">About</a>
+        <a href="#weddings">Weddings</a>
+        <a href="#features">Features</a>
+        <a href="#contact">Contact Us</a>
+        <a href="#blog">Blog</a>
+        <a href="#Login">Login</a>
+        <a href="#Signup">Signup</a>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <img class="slide active" src="lakeside-wedding-udaipur-rajasthan_15_5653-162978932095916.jpeg" alt="Wedding Image 1">
+            <img class="slide" src="OIP.jpg" alt="Wedding Image 2">
+            <img class="slide" src="OIP (2).jpg" alt="Wedding Image 3">
+            <img class="slide" src="OIP (3).jpg" alt="Wedding Image 3">
+            <img class="slide" src="file-1660573970175_15_416194-166057397272203.jpeg" alt="Wedding Image 3">
+            <img class="slide" src="192410-Parita-Kiran-Wedding-www-MnMphotography-net-0514.jpeg" alt="Wedding Image 3">
+            <h2>Celebrating Together</h2>
+        </section>
+
+        <h2 id="features" style="text-align:center; margin-bottom: 20px;">Explore Our Unique Features</h2>
+        <div class="features-grid">
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/budget.png" alt="Budget Planner">
+                <span>Budget Planner</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/culture.png" alt="Regional Templates">
+                <span>Tradition Templates</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/whatsapp.png" alt="WhatsApp Bot">
+                <span>WhatsApp Bot</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/love-diary.png" alt="Emotion Tracker">
+                <span>Emotion Tracker</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/wifi-off.png" alt="Offline Mode">
+                <span>Offline Booking</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/language.png" alt="Language Support">
+                <span>Local Languages</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/groups.png" alt="Community Forum">
+                <span>Community</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/alarm.png" alt="Vendor Help">
+                <span>Emergency Help</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/ok.png" alt="Verified Badge">
+                <span>Verified Vendors</span>
+            </div>
+            <div class="feature-icon">
+                <img src="https://img.icons8.com/ios/50/gift.png" alt="Gamification">
+                <span>Gamification</span>
+            </div>
+        </div>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>ShaadiSmart is designed for couples who want their dream wedding to reflect both tradition and technology. From vendor bookings to emotional memories—we've got you covered. Our platform integrates AI-powered tools with a deep understanding of Indian wedding customs to provide a seamless and enjoyable planning experience. We believe in making your special day truly unforgettable, blending cultural richness with modern efficiency.</p>
+            <p>Our team is passionate about weddings and technology. We strive to innovate and provide solutions that simplify the often complex process of wedding planning. With ShaadiSmart, you can manage your budget, discover regional traditions, communicate with vendors via WhatsApp, and even track your emotional well-being throughout the journey. We are committed to being your trusted partner in creating the perfect Indian wedding.</p>
+        </section>
+
+        <section id="contact" class="contact-form">
+            <h2>Contact Us</h2>
+            <form>
+                <input type="text" name="name" placeholder="Your Name" required />
+                <input type="email" name="email" placeholder="Your Email" required />
+                <textarea name="message" rows="5" placeholder="Your Message" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </section>
+    </div>
+
+    <footer>
+        <div style="margin-bottom: 10px;">
+            <a href="#"><img src="https://img.icons8.com/ios-filled/25/ffffff/facebook-new.png"/></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/25/ffffff/twitter.png"/></a>
+            <a href="#"><img src="https://img.icons8.com/ios-filled/25/ffffff/instagram-new.png"/></a>
+        </div>
+        <p>Contact us: <a href="mailto:contact@shaadismart.in">contact@shaadismart.in</a> | Phone: +91-9876543210</p>
+        <p>&copy; 2025 ShaadiSmart. All rights reserved.</p>
+        <p style="font-size: 0.8rem;">Website design and develop by Manish</p>
+    </footer>
+
+    <script>
+         const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+        const intervalTime = 3000; // Time in milliseconds between slides
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[index].classList.add('active');
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        // Initial slide display
+        showSlide(currentSlide);
+
+        // Set up automatic slide transition
+        setInterval(nextSlide, intervalTime);
+    </script>
+</body>
+</html>
