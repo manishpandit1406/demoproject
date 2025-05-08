@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DevPlayground - Code Adventure: Learn & Win</title>
+  <link rel="stylesheet" href="gamestyle.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="icon" href="logo-removebg.png" type="image/x-icon">
+</head>
+<body>
+  <header class="navbar">
+    <a href="index.html">
+      <div class="logo">
+        <img src="logo-removebg.png" alt="Logo" class="logo-img">
+        <span>DevPlayground</span>
+      </div>
+      </a>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="code-canva.html">Code Canva</a>
+      <a href="game.html">Code Adventure</a>
+      <a href="#">Learn Code</a>
+      <a href="projects.html">View Saved Projects</a>
+      <a href="guidence.html" target="_blank">User Guide</a>
+    </nav>
+  </header>
+
+  <!-- Code-Themed Loading Screen -->
+<div id="loader">
+  <div class="terminal">
+    <div class="terminal-bar">
+      <span class="dot red"></span>
+      <span class="dot yellow"></span>
+      <span class="dot green"></span>
+    </div>
+    <div class="terminal-body">
+      <p><span class="prompt">>_</span> Loading DevPlayground...</p>
+      <p class="typing">Initializing <span class="dotty"></span></p>
+    </div>
+  </div>
+</div>
+
+
+
+  <div class="container" id="game-container">
+    <div class="mode-selector">
+      <h1>Code Adventure - Play & Learn</h1>
+      <button onclick="startGame('html')">HTML</button>
+      <button onclick="startGame('css')">CSS</button>
+      <button onclick="startGame('js')">JavaScript</button>
+    </div>
+    
+
+    <div id="game-area" class="game-area hidden">
+      <h2 id="level-title">Level 1</h2>
+      <pre id="question" class="code-block"></pre>
+      <textarea id="answer" placeholder="Type your code here..."></textarea>
+      <button onclick="checkAnswer()">Submit</button>
+      <p id="feedback"></p>
+      <div id="progress">Progress: <span id="current-level">1</span> / <span id="total-levels">3</span></div>
+      <div id="score">Score: <span id="current-score">0</span></div>
+      <div id="live-preview" class="preview"></div>
+      <button id="retry-button" onclick="retryLevel()" class="hidden">Retry Level</button>
+      <button id="reset-button" onclick="resetGame()">Reset Game</button>
+    </div>
+  </div>
+<div class="space">
+
+</div>
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-section about">
+      <h2>DevPlayground</h2>
+      <div class="footer-logo">
+        <img src="logo-removebg.png" alt="EduFreelance Logo">
+      </div>
+    </div>
+
+    <div class="footer-section links">
+      <h2>Quick Links</h2>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="code-canva.html">Code Canva</a></li>
+        <li><a href="#">Learn Code</a></li>
+        <li><a href="projects.html">Saved Projects</a></li>
+        <li><a href="game.html">Code Adventure</a></li>
+        <li><a href="guidence.html">User Guide</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section contact">
+      <h2>Contact</h2>
+      <p>Email: info@DevPlayground.com</p>
+      <p>Phone: +91 997****022</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© <span id="year"></span> DevPlayground. All rights reserved.</p>
+  </div>
+</footer>
+
+
+  <script src="gamescript.js"></script>
+</body>
+</html>
